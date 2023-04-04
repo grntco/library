@@ -14,7 +14,7 @@ let library = [
         read: 'Yes'
     },
     {
-        title: 'The Third-Body Problem',
+        title: 'The Three-Body Problem',
         author: 'Liu Cixin',
         pages: 302,
         year: 2014,
@@ -25,6 +25,27 @@ let library = [
         author: 'Andy Weir',
         pages: 496,
         year: 2021,
+        read: 'Yes'
+    },
+    {
+        title: 'East of Eden',
+        author: 'John Steinbeck',
+        pages: 704,
+        year: 1952,
+        read: 'Yes'
+    },
+    {
+        title: 'The Martian',
+        author: 'Andy Weir',
+        pages: 369,
+        year: 2011,
+        read: 'No'
+    },
+    {
+        title: 'Stories of Your Life and Others',
+        author: 'Ted Chiang',
+        pages: 285,
+        year: 2002,
         read: 'Yes'
     },
 ];
