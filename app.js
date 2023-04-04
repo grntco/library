@@ -27,7 +27,6 @@ let library = [
         year: 2021,
         read: 'Yes'
     },
-
 ];
 
 class Book {
