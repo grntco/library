@@ -11,6 +11,7 @@ body {
     grid-template-rows: min-content 1fr min-content;
     height: 100vh;
     width: 100vw;
+    position: relative;
 }
 
 header {
@@ -33,6 +34,10 @@ header {
 
 .main-container {
 
+}
+
+.main-container.blur {
+    filter: blur(4px)
 }
 
 .lib-grid {
@@ -65,7 +70,6 @@ header {
 }
 
 footer {
-    background-color: red;
     padding: 16px 48px;
     background-color: rgb(189, 189, 189);
     display: flex;
@@ -76,4 +80,46 @@ footer {
 
 footer a {
     color: black;
+}
+
+
+/* Form popup */
+.form-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.form-container form {
+    height: 50%;
+    width: 25%;
+    border: 2px solid black;
+    border-radius: 25px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+form h2 {
+    align-self: center;
+}
+
+form ul {
+    /* display: flex; */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+form ul li {
+    list-style: none;
+    display: flex;
+    /* grid-template-columns: 1fr 1fr;
+     */
+    justify-content: space-between;
 }

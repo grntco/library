@@ -76,4 +76,3 @@ function displayBooks(arr) {
     }
     return arr;
 }
-displayBooks(library);
