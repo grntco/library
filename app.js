@@ -76,3 +76,10 @@ function displayBooks(arr) {
     }
     return arr;
 }
+
+const addBtn = document.getElementById('add-btn');
+addBtn.addEventListener('click', displayForm);
+
+function displayForm() {
+    return console.log("btn clicked!");
+}

@@ -33,7 +33,7 @@ header {
 }
 
 .main-container {
-
+    /* position: relative; */
 }
 
 .main-container.blur {
@@ -92,6 +92,7 @@ footer a {
     display: grid;
     align-items: center;
     justify-items: center;
+    display: none;
 }
 
 .form-container form {
@@ -110,7 +111,6 @@ form h2 {
 }
 
 form ul {
-    /* display: flex; */
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -119,7 +119,5 @@ form ul {
 form ul li {
     list-style: none;
     display: flex;
-    /* grid-template-columns: 1fr 1fr;
-     */
     justify-content: space-between;
 }
