@@ -111,8 +111,6 @@ const title = document.getElementById('title');
 const author = document.getElementById('author');
 const pages = document.getElementById('pages');
 const year = document.getElementById('year');
-const haveRead = document.getElementById('have-read');
-const notRead = document.getElementById('not-read');
 const read = document.querySelectorAll('input[name="read"]');
 
 const submitBtn = document.getElementById('submit-btn');
@@ -123,8 +121,8 @@ function clearInputs() {
     author.value = '';
     pages.value = '';
     year.value = '';
-    haveRead.value = undefined;
-    notRead.value = undefined;
+    read[0].checked = false;
+    read[1].checked = false;
 }
 
 function checkBook(book) {
