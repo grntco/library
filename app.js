@@ -65,20 +65,25 @@ function addBookToLibrary(book) {
 const libGrid = document.getElementById('lib-grid');
 
 function displayBooks(arr) {
-    for (let i = 0; i < arr.length; i++) {
-        let newBook = document.createElement('div');
-        newBook.classList.add('book')
-        newBook.innerHTML = `
-        <h3 class="title">${arr[i].title}</h3>
-        <div class="author">By ${arr[i].author}</div>
-        <div class="pages">${arr[i].pages} pages</div>
-        <div class="year">Published in ${arr[i].year}</div>
-        <div class="read">Read Status: ${arr[i].read}</div>`;
-        libGrid.appendChild(newBook);
+    let numBooksDisplayed = libGrid.childElementCount;
+    if (arr.length >= numBooksDisplayed + 1) { //Basically, if I just added one or more new books to the library array
+        let diff = arr.length - numBooksDisplayed; // get the difference
+        for (let i = arr.length - diff; i < arr.length; i++) {
+            let newBook = document.createElement('div');
+            newBook.classList.add('book')
+            newBook.innerHTML = `
+            <h3 class="title">${arr[i].title}</h3>
+            <div class="author">By ${arr[i].author}</div>
+            <div class="pages">${arr[i].pages} pages</div>
+            <div class="year">Published in ${arr[i].year}</div>
+            <div class="read">Read Status: ${arr[i].read}</div>`;
+            libGrid.appendChild(newBook);
+        }
+    } else {
+        console.log("Something is wrong.")
     }
     return arr;
 }
-displayBooks(library);
 
 // Show form on add btn click
 const addBtn = document.getElementById('add-btn');
@@ -108,13 +113,41 @@ const pages = document.getElementById('pages');
 const year = document.getElementById('year');
 const haveRead = document.getElementById('have-read');
 const notRead = document.getElementById('not-read');
+const read = document.querySelectorAll('input[name="read"]');
 
 const submitBtn = document.getElementById('submit-btn');
 submitBtn.addEventListener('click', submitBook);
 
+function clearInputs() {
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    year.value = '';
+    haveRead.value = undefined;
+    notRead.value = undefined;
+}
+
+function checkBook(book) {
+    if (!library.some(item => item.title.toUpperCase() === book.title.toUpperCase())) {
+        return true;
+    } else {
+        alert("This book already exists in your library.")
+    }
+}
+
 function submitBook(e) {
-    let newBook = new Book(title.value, author.value, pages.value, year.value, haveRead.value);
-    addBookToLibrary(newBook);
-    closeForm();
-    e.preventDefault();
+    let values = [title.value, author.value, pages.value, year.value]
+    if (read[0].checked) {
+        values.push(read[0].value);
+    } else {
+        values.push(read[1].value);
+    }
+    let newBook = new Book(values[0], values[1], values[2], values[3], values[4]);
+    if (checkBook(newBook)) {
+        addBookToLibrary(newBook);
+        closeForm();
+        displayBooks(library);
+        clearInputs();
+        e.preventDefault();
+    }
 }
