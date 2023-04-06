@@ -8,6 +8,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link href="https://api.fontshare.com/v2/css?f[]=sentient@400,700,501,500,401,701&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" />
     <script src="app.js" defer></script>
     <title>Library</title>
@@ -15,10 +16,10 @@
   <body>
     <header>
       <div class="logo">
-        <i class="fa-solid fa-book"></i>
+        <img src="icons/book.svg" alt="" />
         <h1>Library</h1>
       </div>
-      <button id="add-btn">+ New Book</button>
+      <button class="add-btn" id="add-btn"><img src="icons/plus.svg" alt="">New Book</button>
     </header>
     <div class="main-container" id="main-container">
       <div class="lib-grid" id="lib-grid">
@@ -55,12 +56,7 @@
           <li>
             <legend>Have you read this book?</legend>
             <div class="radio-btns">
-              <input
-                type="radio"
-                id="have-read"
-                name="read"
-                value="Yes"
-              />
+              <input type="radio" id="have-read" name="read" value="Yes" />
               <label for="have-read">Yes</label>
               <input type="radio" id="not-read" name="read" value="No" />
               <label for="not-read">No</label>

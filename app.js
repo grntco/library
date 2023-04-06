@@ -115,7 +115,6 @@ submitBtn.addEventListener('click', submitBook);
 function submitBook(e) {
     let newBook = new Book(title.value, author.value, pages.value, year.value, haveRead.value);
     addBookToLibrary(newBook);
-    displayBooks(library);
     closeForm();
     e.preventDefault();
 }
