@@ -147,7 +147,7 @@ function submitBook(e) {
     }
     let newBook = new Book(values[0], values[1], values[2], values[3], values[4]);
     if (checkBook(newBook)) {
-        newBook.position = library.length;
+        // newBook.position = library.length;
         addBookToLibrary(newBook);
         closeForm();
         displayBooks(library);
@@ -164,3 +164,20 @@ const bookCards = document.querySelectorAll('.book');
 //         delBtn.classList.add('active');
 //     });
 // });
+
+function updatePositions(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        arr[i].position = i;
+    }
+};
+
+// Remove book function
+
+function deleteBook(book) {
+
+    // remove the book from the library
+    library.splice(book.position, 1);
+    // display the library
+    // displayBooks(library);
+}
+
