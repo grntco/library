@@ -24,11 +24,16 @@
     <div class="main-container" id="main-container">
       <div class="lib-grid" id="lib-grid">
         <div class="book">
-          <h3 class="title">The Alchemist</h3>
-          <div class="author">By Paulo Coelho</div>
-          <div class="pages">197 pages</div>
-          <div class="year">Published in 1993</div>
-          <div class="read">Read Status: Yes</div>
+          <div class="book-info">
+            <h3 class="title">The Alchemist</h3>
+            <div class="author">By Paulo Coelho</div>
+            <div class="pages">197 pages</div>
+            <div class="year">Published in 1993</div>
+          </div>
+          <div class="btn-container">
+            <button class="read-btn">Read</button>
+            <button class="del-btn">Delete</button>
+          </div>
         </div>
       </div>
     </div>
@@ -56,9 +61,9 @@
           <li>
             <legend>Have you read this book?</legend>
             <div class="radio-btns">
-              <input type="radio" id="have-read" name="read" value="Yes" />
+              <input type="radio" id="have-read" name="read" value="Read" />
               <label for="have-read">Yes</label>
-              <input type="radio" id="not-read" name="read" value="No" />
+              <input type="radio" id="not-read" name="read" value="Not Read" />
               <label for="not-read">No</label>
             </div>
           </li>

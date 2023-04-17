@@ -72,11 +72,16 @@ function displayBooks(arr) {
             let newBook = document.createElement('div');
             newBook.classList.add('book')
             newBook.innerHTML = `
-            <h3 class="title">${arr[i].title}</h3>
-            <div class="author">By ${arr[i].author}</div>
-            <div class="pages">${arr[i].pages} pages</div>
-            <div class="year">Published in ${arr[i].year}</div>
-            <div class="read">Read Status: ${arr[i].read}</div>`;
+            <div class="book-info">
+                <h3 class="title">${arr[i].title}</h3>
+                <div class="author">By ${arr[i].author}</div>
+                <div class="pages">${arr[i].pages} pages</div>
+                <div class="year">Published in ${arr[i].year}</div>
+            </div>
+            <div class="btn-container">
+                <button class="read">${arr[i].read}</button>
+                <button class="del-btn">Delete</button>
+            </div>`;
             libGrid.appendChild(newBook);
         }
     } else {
@@ -149,3 +154,12 @@ function submitBook(e) {
         e.preventDefault();
     }
 }
+
+const bookCards = document.querySelectorAll('.book');
+
+// bookCards.forEach(card => {
+//     card.addEventListener('click', function() {
+//         let delBtn = card.getElementById('del-btn');
+//         delBtn.classList.add('active');
+//     });
+// });
