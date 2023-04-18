@@ -66,9 +66,9 @@ const libGrid = document.getElementById('lib-grid');
 
 function displayBooks(arr) {
     let numBooksDisplayed = libGrid.childElementCount;
-    if (arr.length >= numBooksDisplayed + 1) { //Basically, if I just added one or more new books to the library array
-        let diff = arr.length - numBooksDisplayed; // get the difference
-        for (let i = arr.length - diff; i < arr.length; i++) {
+    if (arr.length !== numBooksDisplayed) {
+        libGrid.innerHTML = '';
+        for (let i = 0; i < arr.length; i++) {
             let newBook = document.createElement('div');
             newBook.classList.add('book')
             newBook.innerHTML = `
@@ -87,6 +87,28 @@ function displayBooks(arr) {
     } else {
         console.log("Something is wrong.")
     }
+    // let numBooksDisplayed = libGrid.childElementCount;
+    // if (arr.length >= numBooksDisplayed + 1) { //Basically, if I just added one or more new books to the library array
+    //     let diff = arr.length - numBooksDisplayed; // get the difference
+    //     for (let i = arr.length - diff; i < arr.length; i++) {
+    //         let newBook = document.createElement('div');
+    //         newBook.classList.add('book')
+    //         newBook.innerHTML = `
+    //         <div class="book-info">
+    //             <h3 class="title">${arr[i].title}</h3>
+    //             <div class="author">By ${arr[i].author}</div>
+    //             <div class="pages">${arr[i].pages} pages</div>
+    //             <div class="year">Published in ${arr[i].year}</div>
+    //         </div>
+    //         <div class="btn-container">
+    //             <button class="read">${arr[i].read}</button>
+    //             <button class="del-btn">Delete</button>
+    //         </div>`;
+    //         libGrid.appendChild(newBook);
+    //     }
+    // } else {
+    //     console.log("Something is wrong.")
+    // }
     return arr;
 }
 
@@ -151,19 +173,11 @@ function submitBook(e) {
         addBookToLibrary(newBook);
         closeForm();
         displayBooks(library);
+        // addBookToGridArr();
         clearInputs();
         e.preventDefault();
     }
 }
-
-const bookCards = document.querySelectorAll('.book');
-
-// bookCards.forEach(card => {
-//     card.addEventListener('click', function() {
-//         let delBtn = card.getElementById('del-btn');
-//         delBtn.classList.add('active');
-//     });
-// });
 
 function updatePositions(arr) {
     for (let i = 0; i < arr.length; i++) {
@@ -173,11 +187,58 @@ function updatePositions(arr) {
 
 // Remove book function
 
-function deleteBook(book) {
+function deleteBook(e) {
+    if (e.target.classList.contains('del-btn')) {
+        let book = e.target.parentElement.parentElement;
+        let allBooksInGrid = libGrid.querySelectorAll('.book');
+        let index = [...allBooksInGrid].indexOf(book);
+        library.splice(index, 1);
+        displayBooks(library);
+        console.log(library);
+        // let bookTitle = book.firstChild.firstChild;
 
-    // remove the book from the library
-    library.splice(book.position, 1);
-    // display the library
+
+        // let position = library.find(item => item.title === bookTitle);
+        // console.log(position);
+        // library.some(item => item.title.toUpperCase() === book.title.toUpperCase()))
+
+        // let gridPos = Array.from(libGrid).findIndex((item) => item === book); 
+        // console.log(gridPos);
+    }
+    // library.splice(book.position, 1);
+    // updatePositions(library);
     // displayBooks(library);
-}
+    // remove the book from the library
+    // update book positions
+    // display the library
+};
 
+document.addEventListener('click', deleteBook)
+
+// let bookCards = document.getElementsByClassName('book');
+// let bookCardsArr = Array.prototype.slice.call(bookCards);
+
+// let gridArr = [];
+
+// function addBookToGridArr() {
+//     let booksInGrid = document.getElementsByClassName('book');
+//     gridArr = [];
+//     for (let i = 0; i < booksInGrid.length; i++) {
+//         gridArr.push(booksInGrid[i]);
+//     }
+//     return gridArr;
+// }
+
+// gridArr.forEach(book => {
+//     let delBtn = document.querySelector('.del-btn');
+//     delBtn.addEventListener('click', function() {
+//         let gridPos = libGrid.indexOf(book);
+//         console.log(gridPos);
+//     });
+// });
+
+let delBtns = document.getElementsByClassName('del-btn');
+
+Array.from(delBtns).forEach(btn => {
+    btn.addEventListener('click', deleteBook);
+});
