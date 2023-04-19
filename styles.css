@@ -205,12 +205,37 @@ form ul {
     gap: 2rem;
 }
 
-form ul li {
+/* form ul li {
     list-style: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
+} */
+
+form ul li {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* align-items: center; */
+    gap: 1rem;
+}
+
+form ul li label {
+    display: flex;
+    align-items: center;
+}
+
+form ul li .error-msg {
+    grid-column: 1 / -1;
+    justify-content: end;
+    font-size: .8rem;
+    display: none;
+    color: var(--accent-txt-color)
+}
+
+form ul li .error-msg.active {
+    display: flex;
 }
 
 form ul li input {
@@ -235,6 +260,13 @@ input::-webkit-inner-spin-button {
 
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
+}
+
+form .radio-btns {
+    display: flex;
+    align-items: center;
+    justify-self: end;
+    gap: 4px;
 }
 
 form input[type="radio"] {
