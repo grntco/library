@@ -248,3 +248,13 @@ function checkValues(arr) {
         return true;
     }
 }
+
+
+// MOBILE RESPONSIVE
+
+function detectScreenSize() {
+    if (screen.width <= 767) {
+        addBtn.innerHTML = `<img src="icons/plus.svg">`;
+    }
+}
+detectScreenSize();

@@ -94,13 +94,11 @@ button:hover {
     width: 100%;
     padding: 24px 48px;
     display: grid;
-    grid-template-columns: repeat(6, 1fr); /* Find way to make mobile responsive */
-    justify-items: center;
+    grid-template-columns: repeat(auto-fit, 216px);
     gap: 24px;
 }
 
 .book {
-    width: 216px;
     min-height: 250px;
     padding: 24px;
     display: flex;
@@ -114,6 +112,12 @@ button:hover {
 .book:hover {
     cursor: pointer;
     box-shadow: -4px 0px 15px var(--drop-shadow-color-hover);
+}
+
+.book .book-info {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
 }
 
 .book .title {
@@ -224,6 +228,7 @@ form ul li {
 form ul li label {
     display: flex;
     align-items: center;
+    font-weight: 500;
 }
 
 form ul li .error-msg {
@@ -269,6 +274,14 @@ form .radio-btns {
     gap: 4px;
 }
 
+form legend {
+    font-weight: 500;
+}
+
+form .radio-btns label {
+    font-weight: 400;
+}
+
 form input[type="radio"] {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -287,4 +300,26 @@ form input[type="radio"]:checked {
 
 form label[for="have-read"] {
     margin-right: 16px;
+}
+
+/* MOBILE RESPONSIVE */
+
+@media screen and (max-width: 767px) {
+    header {
+        padding: 16px;
+    }
+
+    .lib-grid {
+        padding: 16px;
+        /* grid-template-columns: repeat(auto-fit, 216px); */
+    }
+
+    .add-btn {
+        padding: 8px;
+    }
+
+    .form-container form {
+        padding: 16px;
+        margin: 16px;
+    }
 }
