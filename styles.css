@@ -44,7 +44,6 @@ header {
     display: flex;
     gap: 8px;
     align-items: center;
-    color: var(--accent-txt-color);
     font-size: 1.3rem;
     user-select: none;
 }
@@ -188,10 +187,6 @@ footer a {
     gap: 2rem;
     position: relative;
 }
-
-.form-container form:hover {
-    box-shadow: -4px 0px 15px var(--drop-shadow-color-hover)
-} 
 
 form .x-btn {
     position: absolute;
