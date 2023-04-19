@@ -9,11 +9,14 @@
     --secondary-bg-color: #fafaf9;
     --primary-txt-color: #44403c;
     --drop-shadow-color: rgba(0, 0, 0, 0.1);
+    --drop-shadow-color-hover: rgba(0, 0, 0, 0.2);
     --btn-bg-color: #dc2626;
     --btn-secondary-bg-color: #bef264;
     --btn-bg-color-hover: #b91c1c;
     --btn-txt-color: #fff;
     --accent-txt-color: #dc2626;
+    --primary-border-color: #d6d3d1;
+    --secondary-border-color: #44403c; 
 }
 
 body {
@@ -109,7 +112,7 @@ button:hover {
 }
 
 .book:hover {
-    box-shadow: -4px 0px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: -4px 0px 15px var(--drop-shadow-color-hover);
     cursor: pointer;
 }
 
@@ -127,7 +130,7 @@ button:hover {
 
 .btn-container button {
     background-color: var(--secondary-bg-color);
-    border-color: var(--primary-txt-color);
+    border-color: var(--primary-border-color);
     color: var(--primary-txt-color);
     font-weight: 400;
 }
@@ -176,7 +179,8 @@ footer a {
     min-width: 25%;
     border-radius: 4px;
     background-color: var(--primary-bg-color);
-    box-shadow: var(--drop-shadow-color);
+    /* border: 2px solid var(--primary-border-color); */
+    box-shadow: -2px 0px 10px var(--drop-shadow-color);
     padding: 48px;
     display: flex;
     flex-direction: column;
@@ -184,6 +188,10 @@ footer a {
     gap: 2rem;
     position: relative;
 }
+
+.form-container form:hover {
+    box-shadow: -4px 0px 15px var(--drop-shadow-color-hover)
+} 
 
 form .x-btn {
     position: absolute;

@@ -79,7 +79,7 @@ function displayBooks(arr) {
                 <div class="year">Published in ${arr[i].year}</div>
             </div>
             <div class="btn-container">
-                <button class="read">${arr[i].read}</button>
+                <button class="read-btn">${arr[i].read}</button>
                 <button class="del-btn">Delete</button>
             </div>`;
             libGrid.appendChild(newBook);
@@ -173,7 +173,8 @@ function deleteBook(e) {
     }
 };
 
-document.addEventListener('click', deleteBook)
+document.addEventListener('click', deleteBook);
+document.addEventListener('click', readToggle);
 
 // let delBtns = document.getElementsByClassName('del-btn');
 
@@ -187,4 +188,20 @@ document.addEventListener('click', deleteBook)
 
 Book.prototype.changeReadStatus = function() {
     this.read === 'Read' ? this.read = 'Not Read' : this.read = 'Read';
-}; 
+};
+
+function readToggle(e) {
+    if (e.target.classList.contains('read-btn')) {
+        let book = e.target.parentElement.parentElement;
+        let allBooksInGrid = libGrid.querySelectorAll('.book');
+        let index = [...allBooksInGrid].indexOf(book);
+        library[index].changeReadStatus();
+        if (e.target.textContent === 'Read') {
+            e.target.textContent = 'Not Read';
+        } else {
+            e.target.textContent = 'Read';
+        }
+    }
+}
+
+let readBtns = document.getElementsByClassName('.read-btn')
