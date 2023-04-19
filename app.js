@@ -130,7 +130,7 @@ function clearInputs() {
     read[1].checked = false;
 }
 
-function checkBook(book) {
+function checkBookExists(book) {
     if (!library.some(item => item.title.toUpperCase() === book.title.toUpperCase())) {
         return true;
     } else {
@@ -140,18 +140,20 @@ function checkBook(book) {
 
 function submitBook(e) {
     let values = [title.value, author.value, pages.value, year.value]
-    if (read[0].checked) {
-        values.push(read[0].value);
-    } else {
-        values.push(read[1].value);
-    }
-    let newBook = new Book(values[0], values[1], values[2], values[3], values[4]);
-    if (checkBook(newBook)) {
-        addBookToLibrary(newBook);
-        closeForm();
-        displayBooks(library);
-        clearInputs();
-        e.preventDefault();
+    e.preventDefault();
+    if (checkValues(values)) {
+        if (read[0].checked) {
+            values.push(read[0].value);
+        } else {
+            values.push(read[1].value);
+        }
+        let newBook = new Book(values[0], values[1], values[2], values[3], values[4]);
+        if (checkBookExists(newBook)) {
+            addBookToLibrary(newBook);
+            closeForm();
+            displayBooks(library);
+            clearInputs();
+        }
     }
 }
 
@@ -184,7 +186,7 @@ document.addEventListener('click', readToggle);
 
 
 
-// Read Status
+// Change read status
 
 Book.prototype.changeReadStatus = function() {
     this.read === 'Read' ? this.read = 'Not Read' : this.read = 'Read';
@@ -204,4 +206,45 @@ function readToggle(e) {
     }
 }
 
-let readBtns = document.getElementsByClassName('.read-btn')
+// FORM VALIDATION 
+
+function checkValues(arr) {
+    let titleError = document.getElementById('title-error');
+    let authorError = document.getElementById('author-error');
+    let pagesError = document.getElementById('pages-error');
+    let yearError = document.getElementById('year-error');
+
+    let errorMsgs = document.querySelectorAll('.error-msg');
+
+    if (arr.some((value) => value === '')) {
+        if (title.value === '') {
+            titleError.classList.add('active');
+            return false;
+        } else {
+            titleError.classList.remove('active');
+        }
+        if (author.value === '') {
+            authorError.classList.add('active');
+            return false;
+        } else {
+            authorError.classList.remove('active');
+        }
+        if (pages.value === '') {
+            pagesError.classList.add('active');
+            return false;
+        } else {
+            pagesError.classList.remove('active');
+        }
+        if (year.value === '') {
+            yearError.classList.add('active');
+            return false;
+        } else {
+            yearError.classList.remove('active');
+        }
+    } else {
+        errorMsgs.forEach(msg => {
+            msg.classList.remove('active');
+        })
+        return true;
+    }
+}
