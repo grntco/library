@@ -257,6 +257,10 @@ form ul li input:focus {
     border-color: var(--secondary-border-color);
 }
 
+form ul li input.error {
+    border-color: var(--btn-bg-color);
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;

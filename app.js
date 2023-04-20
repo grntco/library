@@ -167,42 +167,42 @@ function checkValues(arr) {
     if (arr.some((value) => value === '')) {
         if (title.value === '') {
             titleError.classList.add('active');
-            title.style.borderColor = 'var(--accent-txt-color)';
+            title.classList.add('error');
             return false;
         } else {
             titleError.classList.remove('active');
-            title.style.borderColor = 'var(--primary-border-color)';
+            title.classList.remove('error');
         }
         if (author.value === '') {
             authorError.classList.add('active');
-            author.style.borderColor = 'var(--accent-txt-color)';
+            author.classList.add('error');
             return false;
         } else {
             authorError.classList.remove('active');
-            author.style.borderColor = 'var(--primary-border-color)';
+            author.classList.remove('error');
         }
         if (pages.value === '') {
             pagesError.classList.add('active');
-            pages.style.borderColor = 'var(--accent-txt-color)';
+            pages.classList.add('error');
             return false;
         } else {
             pagesError.classList.remove('active');
-            pages.style.borderColor = 'var(--primary-border-color)';
+            pages.classList.remove('error');
         }
         if (year.value === '') {
             yearError.classList.add('active');
-            year.style.borderColor = 'var(--accent-txt-color)';
+            year.classList.add('error');
             return false;
         } else {
             yearError.classList.remove('active');
-            year.style.borderColor = 'var(--primary-border-color)';
+            year.classList.remove('error');
         }
     } else {
         errorMsgs.forEach(msg => {
             msg.classList.remove('active');
         })
         document.querySelectorAll('input[type=text], input[type=number]').forEach(input => {
-            input.style.borderColor = 'var(--primary-border-color)';
+            input.classList.remove('error');
         })
         return true;
     }
