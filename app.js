@@ -217,3 +217,23 @@ function detectScreenSize() {
     }
 }
 detectScreenSize();
+
+// DARK/LIGHT THEME SWITCHER
+
+function toggleTheme() {
+    let icons = document.querySelectorAll('.icon');
+    if (!document.body.classList.contains('dark-mode')) {
+        document.body.classList.add('dark-mode');
+        icons.forEach(icon => {
+            icon.classList.add('dark-mode');
+        });
+    } else {
+        document.body.classList.remove('dark-mode');
+        icons.forEach(icon => {
+            icon.classList.remove('dark-mode');
+        });    
+    }
+}
+
+const themeBtn = document.getElementById('theme-btn');
+themeBtn.addEventListener('click', toggleTheme);

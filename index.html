@@ -13,13 +13,16 @@
     <script src="app.js" defer></script>
     <title>Library</title>
   </head>
-  <body>
+  <body class="">
     <header>
       <div class="logo">
-        <img src="icons/book.svg" alt="" />
+        <img src="icons/book.svg" class="icon" />
         <h1>Library</h1>
       </div>
-      <button class="add-btn" id="add-btn"><img src="icons/plus.svg">New Book</button>
+      <div class="header-btn-container">
+        <button class="theme-btn" id="theme-btn">Theme</button>
+        <button class="add-btn" id="add-btn"><img src="icons/plus.svg">New Book</button>
+      </div>
     </header>
     <div class="main-container" id="main-container">
       <div class="lib-grid" id="lib-grid">
@@ -27,7 +30,7 @@
     </div>
     <div class="form-container" id="form-container">
       <form action="" autocomplete="off">
-        <div class="x-btn" id="x-btn"><img src="icons/x.svg" alt=""></div>
+        <div class="x-btn" id="x-btn"><img src="icons/x.svg" class="icon" ></div>
         <h2>New Book Info</h2>
         <ul>
           <li>

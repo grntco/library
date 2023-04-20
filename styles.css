@@ -11,12 +11,21 @@
     --drop-shadow-color: rgba(0, 0, 0, 0.1);
     --drop-shadow-color-hover: rgba(0, 0, 0, 0.2);
     --btn-bg-color: #dc2626;
-    --btn-secondary-bg-color: #bef264;
     --btn-bg-color-hover: #b91c1c;
     --btn-txt-color: #fff;
     --accent-txt-color: #dc2626;
     --primary-border-color: #d6d3d1;
     --secondary-border-color: #44403c; 
+    --icon-color: #44403c;
+}
+
+.dark-mode {
+    --primary-bg-color: #0c0a09;
+    --secondary-bg-color: #1c1917;
+    --primary-txt-color: #fff;
+    --primary-border-color: #fff;
+    --secondary-border-color: #a8a29e;
+    --icon-color: invert(100%) sepia(94%) saturate(26%) hue-rotate(7deg) brightness(106%) contrast(106%);
 }
 
 ::-moz-selection { /* Firefox */
@@ -62,6 +71,10 @@ header {
     height: 2rem;
 }
 
+.icon.dark-mode {
+    filter: var(--icon-color);
+}
+
 button {
     padding: 8px 24px;
     font-size: 1.2rem;
@@ -71,7 +84,7 @@ button {
     align-items: center;
     justify-content: center;
     gap: 4px;
-    border: 2px solid;
+    border: 2px solid var(--btn-bg-color);
     border-radius: 4px;
     cursor: pointer;
     background-color: var(--btn-bg-color);
@@ -80,10 +93,17 @@ button {
 
 button:hover {
     background-color: var(--btn-bg-color-hover);
+    border-color: var(--btn-bg-color-hover);
+}
+
+.header-btn-container {
+    display: flex;
+    gap: 2rem;
 }
 
 .add-btn {
     gap: 4px;
+    /* border-color: var(--primary-bg-color); */
 }
 
 .main-container.blur {
@@ -132,15 +152,16 @@ button:hover {
     gap: .5rem;
 }
 
-.btn-container button {
+.btn-container button, .theme-btn {
     font-weight: 400;
     background-color: var(--secondary-bg-color);
     border-color: var(--primary-border-color);
     color: var(--primary-txt-color);
 }
 
-.btn-container button:hover {
+.btn-container button:hover, .theme-btn:hover {
     background-color: var(--primary-bg-color);
+    border-color: var(--secondary-border-color);
 }
 
 .btn-container .del-btn:hover {
@@ -197,6 +218,7 @@ form .x-btn {
     top: 16px;
     right: 24px;
     cursor: pointer;
+    accent-color: var(--primary-txt-color);
 }
 
 form h2 {
@@ -333,5 +355,9 @@ form label[for="have-read"] {
     .form-container form {
         padding: 16px;
         margin: 16px;
+    }
+
+    .header-btn-container {
+        gap: 1rem;
     }
 }
