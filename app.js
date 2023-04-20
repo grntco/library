@@ -58,13 +58,13 @@ function Book(title, author, pages, year, read) {
     this.read = read;
 }
 
-function addBookToLibrary(book) {
-    return library.push(book);
-};
+// function addBookToLibrary(book) {
+//     return library.push(book);
+// };
 
-// Book.prototype.addToLibrary = function () {
-//     return library.push(this);
-// }
+Book.prototype.addToLibrary = function () {
+    return library.push(this);
+}
 
 const libGrid = document.getElementById('lib-grid');
 
@@ -153,8 +153,7 @@ function submitBook(e) {
         }
         let newBook = new Book(values[0], values[1], values[2], values[3], values[4]);
         if (checkBookExists(newBook)) {
-            addBookToLibrary(newBook);
-            // newBook.addToLibrary();
+            newBook.addToLibrary();
             closeForm();
             displayBooks(library);
             clearInputs();
