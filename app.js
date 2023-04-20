@@ -47,9 +47,12 @@ const formContainer = document.getElementById('form-container');
 const form = document.querySelector('form');
 const mainContainer = document.getElementById('main-container');
 
+let formDisplayed = false;
+
 function displayForm() {
     mainContainer.classList.add('blur');
     formContainer.classList.add('active');
+    formDisplayed = true;
 }
 
 addBtn.addEventListener('click', displayForm);
@@ -60,20 +63,16 @@ const xBtn = document.getElementById('x-btn');
 function closeForm() {
     mainContainer.classList.remove('blur');
     formContainer.classList.remove('active');
+    formDisplayed = false;
 }
 
 xBtn.addEventListener('click', closeForm);
 
-
-// write an event listener for when the form is displayed (i.e., active), to close the form if someone clicks outside the form
-// document.addEventListener('click', function(e) {
-//     if (formContainer.classList.contains('active')) {
-//         if (e.target !== form) {
-//             closeForm();
-//         }
-//     }
-// });
-
+document.addEventListener('click', function(e) {
+    if ((formDisplayed) && (e.target === formContainer)) {
+        closeForm();
+    }
+})
 
 // Get values from form
 const title = document.getElementById('title');
