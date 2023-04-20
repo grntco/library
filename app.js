@@ -8,13 +8,9 @@ function Book(title, author, pages, year, read) {
     this.read = read;
 }
 
-// function addBookToLibrary(book) {
-//     return library.push(book);
-// };
-
-Book.prototype.addToLibrary = function () {
-    return library.push(this);
-}
+function addBookToLibrary(book) {
+    return library.push(book);
+};
 
 const libGrid = document.getElementById('lib-grid');
 
@@ -116,7 +112,7 @@ function submitBook(e) {
         }
         let newBook = new Book(values[0], values[1], values[2], values[3], values[4]);
         if (!checkDuplicate(newBook)) {
-            newBook.addToLibrary();
+            addBookToLibrary(newBook);
             closeForm();
             displayBooks(library);
             clearInputs();
