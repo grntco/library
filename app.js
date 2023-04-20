@@ -1,54 +1,4 @@
-let library = [
-    // {
-    //     title: 'Dune',
-    //     author: 'Frank Herbert',
-    //     pages: 412,
-    //     year: 1965,
-    //     read: 'Yes'
-    // },
-    // {
-    //     title: 'Foundation',
-    //     author: 'Isaac Asimov',
-    //     pages: 255,
-    //     year: 1951,
-    //     read: 'Yes'
-    // },
-    // {
-    //     title: 'The Three-Body Problem',
-    //     author: 'Liu Cixin',
-    //     pages: 302,
-    //     year: 2014,
-    //     read: 'No'
-    // },
-    // {
-    //     title: 'Project Hail Mary',
-    //     author: 'Andy Weir',
-    //     pages: 496,
-    //     year: 2021,
-    //     read: 'Yes'
-    // },
-    // {
-    //     title: 'East of Eden',
-    //     author: 'John Steinbeck',
-    //     pages: 704,
-    //     year: 1952,
-    //     read: 'Yes'
-    // },
-    // {
-    //     title: 'The Martian',
-    //     author: 'Andy Weir',
-    //     pages: 369,
-    //     year: 2011,
-    //     read: 'No'
-    // },
-    // {
-    //     title: 'Stories of Your Life and Others',
-    //     author: 'Ted Chiang',
-    //     pages: 285,
-    //     year: 2002,
-    //     read: 'Yes'
-    // },
-];
+let library = [];
 
 function Book(title, author, pages, year, read) {
     this.title = title,
@@ -68,9 +18,11 @@ Book.prototype.addToLibrary = function () {
 
 const libGrid = document.getElementById('lib-grid');
 
+// Display Books
+
 function displayBooks(arr) {
-    let numBooksDisplayed = libGrid.childElementCount;
-    if (arr.length !== numBooksDisplayed) {
+    let booksDisplayedCount = libGrid.childElementCount;
+    if (arr.length !== booksDisplayedCount) {
         libGrid.innerHTML = '';
         for (let i = 0; i < arr.length; i++) {
             let newBook = document.createElement('div');
@@ -89,31 +41,43 @@ function displayBooks(arr) {
             libGrid.appendChild(newBook);
         }
     } else {
-        console.log("Something is wrong.")
+        console.error("Failed to display books.")
     }
-    return arr;
 }
 
-// Show form on add btn click
+// Display Form
 const addBtn = document.getElementById('add-btn');
 const formContainer = document.getElementById('form-container');
+const form = document.querySelector('form');
 const mainContainer = document.getElementById('main-container');
-
-addBtn.addEventListener('click', displayForm);
 
 function displayForm() {
     mainContainer.classList.add('blur');
     formContainer.classList.add('active');
 }
 
-// Close form on x btn click
+addBtn.addEventListener('click', displayForm);
+
+// Close Form
 const xBtn = document.getElementById('x-btn');
-xBtn.addEventListener('click', closeForm);
 
 function closeForm() {
     mainContainer.classList.remove('blur');
     formContainer.classList.remove('active');
 }
+
+xBtn.addEventListener('click', closeForm);
+
+
+// write an event listener for when the form is displayed (i.e., active), to close the form if someone clicks outside the form
+// document.addEventListener('click', function(e) {
+//     if (formContainer.classList.contains('active')) {
+//         if (e.target !== form) {
+//             closeForm();
+//         }
+//     }
+// });
+
 
 // Get values from form
 const title = document.getElementById('title');
@@ -121,9 +85,7 @@ const author = document.getElementById('author');
 const pages = document.getElementById('pages');
 const year = document.getElementById('year');
 const read = document.querySelectorAll('input[name="read"]');
-
 const submitBtn = document.getElementById('submit-btn');
-submitBtn.addEventListener('click', submitBook);
 
 function clearInputs() {
     title.value = '';
@@ -134,11 +96,12 @@ function clearInputs() {
     read[1].checked = false;
 }
 
-function checkBookExists(book) {
+function checkDuplicate(book) {
     if (!library.some(item => item.title.toUpperCase() === book.title.toUpperCase())) {
-        return true;
+        return false;
     } else {
         alert("This book already exists in your library.")
+        return true;
     }
 }
 
@@ -152,7 +115,7 @@ function submitBook(e) {
             values.push(read[1].value);
         }
         let newBook = new Book(values[0], values[1], values[2], values[3], values[4]);
-        if (checkBookExists(newBook)) {
+        if (!checkDuplicate(newBook)) {
             newBook.addToLibrary();
             closeForm();
             displayBooks(library);
@@ -160,15 +123,9 @@ function submitBook(e) {
         }
     }
 }
+submitBtn.addEventListener('click', submitBook);
 
-function updatePositions(arr) {
-    for (let i = 0; i < arr.length; i++) {
-        arr[i].position = i;
-    }
-};
-
-// Remove book function
-
+// Delete Book
 function deleteBook(e) {
     if (e.target.classList.contains('del-btn')) {
         let book = e.target.parentElement.parentElement;
@@ -180,23 +137,13 @@ function deleteBook(e) {
 };
 
 document.addEventListener('click', deleteBook);
-document.addEventListener('click', readToggle);
 
-// let delBtns = document.getElementsByClassName('del-btn');
-
-// Array.from(delBtns).forEach(btn => {
-//     btn.addEventListener('click', deleteBook);
-// });
-
-
-
-// Change read status
-
+// Change Read Status
 Book.prototype.changeReadStatus = function() {
     this.read === 'Read' ? this.read = 'Not Read' : this.read = 'Read';
 };
 
-function readToggle(e) {
+function toggleRead(e) {
     if (e.target.classList.contains('read-btn')) {
         let book = e.target.parentElement.parentElement;
         let allBooksInGrid = libGrid.querySelectorAll('.book');
@@ -209,6 +156,8 @@ function readToggle(e) {
         }
     }
 }
+
+document.addEventListener('click', toggleRead);
 
 // FORM VALIDATION 
 
