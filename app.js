@@ -62,6 +62,10 @@ function addBookToLibrary(book) {
     return library.push(book);
 };
 
+// Book.prototype.addToLibrary = function () {
+//     return library.push(this);
+// }
+
 const libGrid = document.getElementById('lib-grid');
 
 function displayBooks(arr) {
@@ -150,6 +154,7 @@ function submitBook(e) {
         let newBook = new Book(values[0], values[1], values[2], values[3], values[4]);
         if (checkBookExists(newBook)) {
             addBookToLibrary(newBook);
+            // newBook.addToLibrary();
             closeForm();
             displayBooks(library);
             clearInputs();
@@ -219,31 +224,42 @@ function checkValues(arr) {
     if (arr.some((value) => value === '')) {
         if (title.value === '') {
             titleError.classList.add('active');
+            title.style.borderColor = 'var(--accent-txt-color)';
             return false;
         } else {
             titleError.classList.remove('active');
+            title.style.borderColor = 'var(--primary-border-color)';
         }
         if (author.value === '') {
             authorError.classList.add('active');
+            author.style.borderColor = 'var(--accent-txt-color)';
             return false;
         } else {
             authorError.classList.remove('active');
+            author.style.borderColor = 'var(--primary-border-color)';
         }
         if (pages.value === '') {
             pagesError.classList.add('active');
+            pages.style.borderColor = 'var(--accent-txt-color)';
             return false;
         } else {
             pagesError.classList.remove('active');
+            pages.style.borderColor = 'var(--primary-border-color)';
         }
         if (year.value === '') {
             yearError.classList.add('active');
+            year.style.borderColor = 'var(--accent-txt-color)';
             return false;
         } else {
             yearError.classList.remove('active');
+            year.style.borderColor = 'var(--primary-border-color)';
         }
     } else {
         errorMsgs.forEach(msg => {
             msg.classList.remove('active');
+        })
+        document.querySelectorAll('input[type=text], input[type=number]').forEach(input => {
+            input.style.borderColor = 'var(--primary-border-color)';
         })
         return true;
     }

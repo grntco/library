@@ -309,6 +309,14 @@ form label[for="have-read"] {
         padding: 16px;
     }
 
+    .logo {
+        font-size: 1rem;
+    }
+
+    .logo img {
+        height: 1.8rem;
+    }
+
     .lib-grid {
         padding: 16px;
         /* grid-template-columns: repeat(auto-fit, 216px); */
