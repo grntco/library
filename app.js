@@ -12,11 +12,15 @@ class Book {
     changeReadStatus() {
         return this.read === 'Read' ? this.read = 'Not Read' : this.read = 'Read';
     };
+
+    addToLibrary() {
+        return library.push(this)
+    }
 }
 
-function addBookToLibrary(book) {
-    return library.push(book);
-};
+// function addBookToLibrary(book) {
+//     return library.push(book);
+// };
 
 const libGrid = document.getElementById('lib-grid');
 
@@ -117,7 +121,7 @@ function submitBook(e) {
         }
         let newBook = new Book(values[0], values[1], values[2], values[3], values[4]);
         if (!checkDuplicate(newBook)) {
-            addBookToLibrary(newBook);
+            newBook.addToLibrary();
             closeForm();
             displayBooks(library);
             clearInputs();
