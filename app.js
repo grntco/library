@@ -1,11 +1,17 @@
 let library = [];
 
-function Book(title, author, pages, year, read) {
-    this.title = title,
-    this.author = author,
-    this.pages = pages,
-    this.year = year,
-    this.read = read;
+class Book {
+    constructor(_title, _author, _pages, _year, _read) {
+        this.title = _title,
+        this.author = _author,
+        this.pages = _pages,
+        this.year = _year,
+        this.read = _read;
+    }
+
+    changeReadStatus() {
+        return this.read === 'Read' ? this.read = 'Not Read' : this.read = 'Read';
+    };
 }
 
 function addBookToLibrary(book) {
@@ -132,11 +138,6 @@ function deleteBook(e) {
 };
 
 document.addEventListener('click', deleteBook);
-
-// Change Read Status
-Book.prototype.changeReadStatus = function() {
-    this.read === 'Read' ? this.read = 'Not Read' : this.read = 'Read';
-};
 
 function toggleRead(e) {
     if (e.target.classList.contains('read-btn')) {
