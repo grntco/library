@@ -18,10 +18,6 @@ class Book {
     }
 }
 
-// function addBookToLibrary(book) {
-//     return library.push(book);
-// };
-
 const libGrid = document.getElementById('lib-grid');
 
 // Display Books
