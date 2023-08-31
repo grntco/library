@@ -257,13 +257,13 @@ form ul li .error-msg {
     grid-column: 1 / -1;
     justify-content: end;
     font-size: .8rem;
-    display: none;
+    display: flex;
     color: var(--accent-txt-color)
 }
 
-form ul li .error-msg.active {
+/* form ul li .error-msg.active {
     display: flex;
-}
+} */
 
 form ul li input {
     padding: 4px;

@@ -109,7 +109,9 @@ function checkDuplicate(book) {
 function submitBook(e) {
     let values = [title.value, author.value, pages.value, year.value]
     e.preventDefault();
-    if (checkValues(values)) {
+    if (!form.checkValidity()) {
+        displayError();
+    } else {
         if (read[0].checked) {
             values.push(read[0].value);
         } else {
@@ -157,55 +159,86 @@ document.addEventListener('click', toggleRead);
 
 // FORM VALIDATION 
 
-function checkValues(arr) {
+// function checkValues(arr) {
+//     let titleError = document.getElementById('title-error');
+//     let authorError = document.getElementById('author-error');
+//     let pagesError = document.getElementById('pages-error');
+//     let yearError = document.getElementById('year-error');
+
+//     let errorMsgs = document.querySelectorAll('.error-msg');
+
+//     if (arr.some((value) => value === '')) {
+//         if (title.value === '') {
+//             titleError.classList.add('active');
+//             title.classList.add('error');
+//             return false;
+//         } else {
+//             titleError.classList.remove('active');
+//             title.classList.remove('error');
+//         }
+//         if (author.value === '') {
+//             authorError.classList.add('active');
+//             author.classList.add('error');
+//             return false;
+//         } else {
+//             authorError.classList.remove('active');
+//             author.classList.remove('error');
+//         }
+//         if (pages.value === '') {
+//             pagesError.classList.add('active');
+//             pages.classList.add('error');
+//             return false;
+//         } else {
+//             pagesError.classList.remove('active');
+//             pages.classList.remove('error');
+//         }
+//         if (year.value === '') {
+//             yearError.classList.add('active');
+//             year.classList.add('error');
+//             return false;
+//         } else {
+//             yearError.classList.remove('active');
+//             year.classList.remove('error');
+//         }
+//     } else {
+//         errorMsgs.forEach(msg => {
+//             msg.classList.remove('active');
+//         })
+//         document.querySelectorAll('input[type=text], input[type=number]').forEach(input => {
+//             input.classList.remove('error');
+//         })
+//         return true;
+//     }
+// }
+
+function displayError() {
     let titleError = document.getElementById('title-error');
     let authorError = document.getElementById('author-error');
     let pagesError = document.getElementById('pages-error');
     let yearError = document.getElementById('year-error');
 
-    let errorMsgs = document.querySelectorAll('.error-msg');
-
-    if (arr.some((value) => value === '')) {
-        if (title.value === '') {
-            titleError.classList.add('active');
-            title.classList.add('error');
-            return false;
-        } else {
-            titleError.classList.remove('active');
-            title.classList.remove('error');
-        }
-        if (author.value === '') {
-            authorError.classList.add('active');
-            author.classList.add('error');
-            return false;
-        } else {
-            authorError.classList.remove('active');
-            author.classList.remove('error');
-        }
-        if (pages.value === '') {
-            pagesError.classList.add('active');
-            pages.classList.add('error');
-            return false;
-        } else {
-            pagesError.classList.remove('active');
-            pages.classList.remove('error');
-        }
-        if (year.value === '') {
-            yearError.classList.add('active');
-            year.classList.add('error');
-            return false;
-        } else {
-            yearError.classList.remove('active');
-            year.classList.remove('error');
-        }
+    if (title.validity.valueMissing) {
+        titleError.textContent = 'Please provide a title.';
     } else {
-        errorMsgs.forEach(msg => {
-            msg.classList.remove('active');
-        })
-        document.querySelectorAll('input[type=text], input[type=number]').forEach(input => {
-            input.classList.remove('error');
-        })
-        return true;
+        titleError.textContent = '';
+    }
+
+    if (author.validity.valueMissing) {
+        authorError.textContent = 'Please provide an author.';
+    } else {
+        authorError.textContent = '';
+    }
+
+    if (pages.validity.valueMissing) {
+        pagesError.textContent = 'Please provide the number of pages.';
+    } else {
+        pagesError.textContent = '';
+    }
+
+    if (year.validity.valueMissing) {
+        yearError.textContent = 'Please provide a publication year.';
+    } else {
+        yearError.textContent = '';
     }
 }
 
