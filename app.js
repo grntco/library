@@ -1,3 +1,19 @@
+const libGrid = document.getElementById('lib-grid');
+const title = document.getElementById('title');
+const author = document.getElementById('author');
+const pages = document.getElementById('pages');
+const year = document.getElementById('year');
+const read = document.querySelectorAll('input[name="read"]');
+const submitBtn = document.getElementById('submit-btn');
+const errorMsgs = [ ...document.querySelectorAll('.error-msg')];
+const requiredInputs = [ ...document.querySelectorAll('input[required]')];
+const themeBtn = document.getElementById('theme-btn');
+const addBtn = document.getElementById('add-btn');
+const xBtn = document.getElementById('x-btn');
+const formContainer = document.getElementById('form-container');
+const form = document.querySelector('form');
+const mainContainer = document.getElementById('main-container');
+
 let library = [];
 
 class Book {
@@ -17,8 +33,6 @@ class Book {
         return library.push(this)
     }
 }
-
-const libGrid = document.getElementById('lib-grid');
 
 // Display Books
 
@@ -48,51 +62,19 @@ function displayBooks(arr) {
 }
 
 // Display Form
-const addBtn = document.getElementById('add-btn');
-const formContainer = document.getElementById('form-container');
-const form = document.querySelector('form');
-const mainContainer = document.getElementById('main-container');
 
 function displayForm() {
     mainContainer.classList.add('blur');
     formContainer.classList.add('active');
-    requiredInputs.forEach(input => input.style.borderColor = 'var(--primary-border-color)');
 }
 
-addBtn.addEventListener('click', displayForm);
-
 // Close Form
-const xBtn = document.getElementById('x-btn');
 
 function closeForm() {
     mainContainer.classList.remove('blur');
     formContainer.classList.remove('active');
     resetForm();
 }
-
-xBtn.addEventListener('click', closeForm);
-
-document.addEventListener('click', function(e) {
-    if ((formContainer.classList.contains('active')) && (e.target === formContainer)) {
-        closeForm();
-    }
-})
-
-// Get values from form
-const title = document.getElementById('title');
-const author = document.getElementById('author');
-const pages = document.getElementById('pages');
-const year = document.getElementById('year');
-const read = document.querySelectorAll('input[name="read"]');
-const submitBtn = document.getElementById('submit-btn');
-const errorMsgs = [ ...document.querySelectorAll('.error-msg')];
-const requiredInputs = [ ...document.querySelectorAll('input[required]')];
-
-requiredInputs.forEach(input => {
-    input.addEventListener('input', () => {
-        displayError(input);
-    });
-});
 
 function displayError(input) {
     let requiredContent = '';
@@ -109,14 +91,16 @@ function displayError(input) {
             requiredContent = 'the publication year';
         }
         errorMsg.textContent = `Please provide ${requiredContent}`;
+        input.classList.add('invalid');
     } else {
         errorMsg.textContent = '';
+        input.classList.remove('invalid');
     }
 };
 
 function resetForm() {
     form.reset()
-    requiredInputs.forEach(input => input.style.borderColor = 'var(--primary-border-color)');
+    requiredInputs.forEach(input => input.classList.remove('invalid'));
     errorMsgs.map(msg => msg.textContent = '');
 }
 
@@ -148,13 +132,10 @@ function submitBook(e) {
             closeForm();
             displayBooks(library);
             resetForm();
-            // form.reset();
         }
     }
 }
-submitBtn.addEventListener('click', submitBook);
 
-// Delete Book
 function deleteBook(e) {
     if (e.target.classList.contains('del-btn')) {
         let book = e.target.parentElement.parentElement;
@@ -164,8 +145,6 @@ function deleteBook(e) {
         displayBooks(library);
     }
 };
-
-document.addEventListener('click', deleteBook);
 
 function toggleRead(e) {
     if (e.target.classList.contains('read-btn')) {
@@ -180,23 +159,6 @@ function toggleRead(e) {
         }
     }
 }
-
-document.addEventListener('click', toggleRead);
-
-// FORM VALIDATION 
-
-
-
-// MOBILE RESPONSIVE
-
-function detectScreenSize() {
-    if (screen.width <= 767) {
-        addBtn.innerHTML = `<img src="icons/plus.svg">`;
-    }
-}
-detectScreenSize();
-
-// DARK/LIGHT THEME SWITCHER
 
 function toggleTheme() {
     let icons = document.querySelectorAll('.icon');
@@ -213,5 +175,35 @@ function toggleTheme() {
     }
 }
 
-const themeBtn = document.getElementById('theme-btn');
+// Change to just icon on add-btn on mobile
+function detectScreenSize() {
+    if (screen.width <= 767) {
+        addBtn.innerHTML = `<img src="icons/plus.svg">`;
+    }
+}
+detectScreenSize();
+
+// FORM VALIDATION 
+
+// EVENTS
+
+xBtn.addEventListener('click', closeForm);
+
+document.addEventListener('click', function(e) {
+    if ((formContainer.classList.contains('active')) && (e.target === formContainer)) {
+        closeForm();
+    }
+})
+
+requiredInputs.forEach(input => {
+    input.addEventListener('input', () => {
+        displayError(input);
+    });
+});
+
+submitBtn.addEventListener('click', submitBook);
+document.addEventListener('click', deleteBook);
+document.addEventListener('click', toggleRead);
 themeBtn.addEventListener('click', toggleTheme);
+addBtn.addEventListener('click', displayForm);
+

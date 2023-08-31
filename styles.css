@@ -231,19 +231,10 @@ form ul {
     gap: 2rem;
 }
 
-/* form ul li {
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-} */
-
 form ul li {
     list-style: none;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* align-items: center; */
     gap: 1rem;
 }
 
@@ -268,12 +259,6 @@ form ul li .error-msg {
     color: var(--accent-txt-color)
 }
 
-/* form ul li .error-msg.active {
-    display: flex;
-} */
-
-
-
 form ul li input {
     padding: 4px;
     /* width: ; */
@@ -284,22 +269,13 @@ form ul li input {
     border: 2px solid var(--primary-border-color);
 }
 
-
-
-
-form ul li input:required:focus {
+form ul li input:focus {
     border-color: var(--secondary-border-color);
 }
 
-form ul li input:required:valid {
-    border-color: var(--primary-border-color);
-}
-
-form ul li input:required:invalid {
+form ul li input:required.invalid {
     border-color: var(--btn-bg-color);
 }
-
-
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
