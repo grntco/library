@@ -56,7 +56,7 @@ const mainContainer = document.getElementById('main-container');
 function displayForm() {
     mainContainer.classList.add('blur');
     formContainer.classList.add('active');
-    inputs.forEach(input => input.style.borderColor = 'var(--primary-border-color)');
+    requiredInputs.forEach(input => input.style.borderColor = 'var(--primary-border-color)');
 }
 
 addBtn.addEventListener('click', displayForm);
@@ -67,6 +67,7 @@ const xBtn = document.getElementById('x-btn');
 function closeForm() {
     mainContainer.classList.remove('blur');
     formContainer.classList.remove('active');
+    resetForm();
 }
 
 xBtn.addEventListener('click', closeForm);
@@ -85,11 +86,37 @@ const year = document.getElementById('year');
 const read = document.querySelectorAll('input[name="read"]');
 const submitBtn = document.getElementById('submit-btn');
 const errorMsgs = [ ...document.querySelectorAll('.error-msg')];
-const inputs = [ ...document.querySelectorAll('input')];
+const requiredInputs = [ ...document.querySelectorAll('input[required]')];
+
+requiredInputs.forEach(input => {
+    input.addEventListener('input', () => {
+        displayError(input);
+    });
+});
+
+function displayError(input) {
+    let requiredContent = '';
+    let errorMsg = input.nextElementSibling;
+    
+    if (input.validity.valueMissing) {
+        if (input === title) {
+            requiredContent = 'a title';
+        } else if (input === author) {
+            requiredContent = 'an author';
+        } else if (input === pages) {
+            requiredContent = 'the number of pages';
+        } else if (input === year) {
+            requiredContent = 'the publication year';
+        }
+        errorMsg.textContent = `Please provide ${requiredContent}`;
+    } else {
+        errorMsg.textContent = '';
+    }
+};
 
 function resetForm() {
     form.reset()
-    inputs.forEach(input => input.style.borderColor = 'var(--primary-border-color)');
+    requiredInputs.forEach(input => input.style.borderColor = 'var(--primary-border-color)');
     errorMsgs.map(msg => msg.textContent = '');
 }
 
@@ -106,7 +133,9 @@ function submitBook(e) {
     let values = [title.value, author.value, pages.value, year.value]
     e.preventDefault();
     if (!form.checkValidity()) {
-        displayError();
+        requiredInputs.forEach(input => {
+            displayError(input);
+        });
     } else {
         if (read[0].checked) {
             values.push(read[0].value);
@@ -156,88 +185,6 @@ document.addEventListener('click', toggleRead);
 
 // FORM VALIDATION 
 
-// function checkValues(arr) {
-//     let titleError = document.getElementById('title-error');
-//     let authorError = document.getElementById('author-error');
-//     let pagesError = document.getElementById('pages-error');
-//     let yearError = document.getElementById('year-error');
-
-//     let errorMsgs = document.querySelectorAll('.error-msg');
-
-//     if (arr.some((value) => value === '')) {
-//         if (title.value === '') {
-//             titleError.classList.add('active');
-//             title.classList.add('error');
-//             return false;
-//         } else {
-//             titleError.classList.remove('active');
-//             title.classList.remove('error');
-//         }
-//         if (author.value === '') {
-//             authorError.classList.add('active');
-//             author.classList.add('error');
-//             return false;
-//         } else {
-//             authorError.classList.remove('active');
-//             author.classList.remove('error');
-//         }
-//         if (pages.value === '') {
-//             pagesError.classList.add('active');
-//             pages.classList.add('error');
-//             return false;
-//         } else {
-//             pagesError.classList.remove('active');
-//             pages.classList.remove('error');
-//         }
-//         if (year.value === '') {
-//             yearError.classList.add('active');
-//             year.classList.add('error');
-//             return false;
-//         } else {
-//             yearError.classList.remove('active');
-//             year.classList.remove('error');
-//         }
-//     } else {
-//         errorMsgs.forEach(msg => {
-//             msg.classList.remove('active');
-//         })
-//         document.querySelectorAll('input[type=text], input[type=number]').forEach(input => {
-//             input.classList.remove('error');
-//         })
-//         return true;
-//     }
-// }
-
-function displayError() {
-    let titleError = document.getElementById('title-error');
-    let authorError = document.getElementById('author-error');
-    let pagesError = document.getElementById('pages-error');
-    let yearError = document.getElementById('year-error');
-
-    if (title.validity.valueMissing) {
-        titleError.textContent = 'Please provide a title.';
-    } else {
-        titleError.textContent = '';
-    }
-
-    if (author.validity.valueMissing) {
-        authorError.textContent = 'Please provide an author.';
-    } else {
-        authorError.textContent = '';
-    }
-
-    if (pages.validity.valueMissing) {
-        pagesError.textContent = 'Please provide the number of pages.';
-    } else {
-        pagesError.textContent = '';
-    }
-
-    if (year.validity.valueMissing) {
-        yearError.textContent = 'Please provide a publication year.';
-    } else {
-        yearError.textContent = '';
-    }
-}
 
 
 // MOBILE RESPONSIVE
