@@ -56,6 +56,7 @@ const mainContainer = document.getElementById('main-container');
 function displayForm() {
     mainContainer.classList.add('blur');
     formContainer.classList.add('active');
+    inputs.forEach(input => input.style.borderColor = 'var(--primary-border-color)');
 }
 
 addBtn.addEventListener('click', displayForm);
@@ -84,9 +85,11 @@ const year = document.getElementById('year');
 const read = document.querySelectorAll('input[name="read"]');
 const submitBtn = document.getElementById('submit-btn');
 const errorMsgs = [ ...document.querySelectorAll('.error-msg')];
+const inputs = [ ...document.querySelectorAll('input')];
 
 function resetForm() {
     form.reset()
+    inputs.forEach(input => input.style.borderColor = 'var(--primary-border-color)');
     errorMsgs.map(msg => msg.textContent = '');
 }
 

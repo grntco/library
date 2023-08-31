@@ -253,6 +253,13 @@ form ul li label {
     font-weight: 500;
 }
 
+
+form ul li label:nth-child(-n+1)::before {
+    content: "*";
+    color: var(--btn-bg-color);
+    margin-right: 2px;
+}
+
 form ul li .error-msg {
     grid-column: 1 / -1;
     justify-content: end;
@@ -265,6 +272,8 @@ form ul li .error-msg {
     display: flex;
 } */
 
+
+
 form ul li input {
     padding: 4px;
     /* width: ; */
@@ -275,12 +284,15 @@ form ul li input {
     border: 2px solid var(--primary-border-color);
 }
 
+
+
+
 form ul li input:required:focus {
     border-color: var(--secondary-border-color);
 }
 
 form ul li input:required:valid {
-    border-color: green;
+    border-color: var(--primary-border-color);
 }
 
 form ul li input:required:invalid {
