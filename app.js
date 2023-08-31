@@ -83,23 +83,11 @@ const pages = document.getElementById('pages');
 const year = document.getElementById('year');
 const read = document.querySelectorAll('input[name="read"]');
 const submitBtn = document.getElementById('submit-btn');
+const errorMsgs = [ ...document.querySelectorAll('.error-msg')];
 
-// const inputs = document.querySelectorAll('input');
-// inputs.forEach(input => {
-//     input.addEventListener(('input'), () => {
-//         if (!input.validity.valid) displayError();
-//     })
-// })
-
-function resetInputs() {
+function resetForm() {
     form.reset()
-    title.value = '';
-    title.style.borderColor = 'var(--primary-border-color)';
-    author.value = '';
-    pages.value = '';
-    year.value = '';
-    read[0].checked = false;
-    read[1].checked = false;
+    errorMsgs.map(msg => msg.textContent = '');
 }
 
 function checkDuplicate(book) {
@@ -127,8 +115,8 @@ function submitBook(e) {
             newBook.addToLibrary();
             closeForm();
             displayBooks(library);
-            // resetInputs();
-            form.reset();
+            resetForm();
+            // form.reset();
         }
     }
 }
