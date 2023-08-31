@@ -53,12 +53,9 @@ const formContainer = document.getElementById('form-container');
 const form = document.querySelector('form');
 const mainContainer = document.getElementById('main-container');
 
-let formDisplayed = false;
-
 function displayForm() {
     mainContainer.classList.add('blur');
     formContainer.classList.add('active');
-    formDisplayed = true;
 }
 
 addBtn.addEventListener('click', displayForm);
@@ -69,13 +66,12 @@ const xBtn = document.getElementById('x-btn');
 function closeForm() {
     mainContainer.classList.remove('blur');
     formContainer.classList.remove('active');
-    formDisplayed = false;
 }
 
 xBtn.addEventListener('click', closeForm);
 
 document.addEventListener('click', function(e) {
-    if ((formDisplayed) && (e.target === formContainer)) {
+    if ((formContainer.classList.contains('active')) && (e.target === formContainer)) {
         closeForm();
     }
 })
@@ -88,8 +84,17 @@ const year = document.getElementById('year');
 const read = document.querySelectorAll('input[name="read"]');
 const submitBtn = document.getElementById('submit-btn');
 
-function clearInputs() {
+// const inputs = document.querySelectorAll('input');
+// inputs.forEach(input => {
+//     input.addEventListener(('input'), () => {
+//         if (!input.validity.valid) displayError();
+//     })
+// })
+
+function resetInputs() {
+    form.reset()
     title.value = '';
+    title.style.borderColor = 'var(--primary-border-color)';
     author.value = '';
     pages.value = '';
     year.value = '';
@@ -122,7 +127,8 @@ function submitBook(e) {
             newBook.addToLibrary();
             closeForm();
             displayBooks(library);
-            clearInputs();
+            // resetInputs();
+            form.reset();
         }
     }
 }
